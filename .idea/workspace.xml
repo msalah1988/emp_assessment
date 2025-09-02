@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="686d6505-db92-436b-a44d-31e03a5be9f8" name="Changes" comment="V2.0, Adding Branding">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="686d6505-db92-436b-a44d-31e03a5be9f8" name="Changes" comment="V2.1, Adding requirements.txt">
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +22,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "msalah1988"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/msalah1988/emp_assessment.git",
+    "accountId": "e96b3a92-aa5e-4142-88ab-8534174264e4"
+  }
+}]]></component>
   <component name="ProjectColorInfo"><![CDATA[{
   "associatedIndex": 6
 }]]></component>
@@ -77,12 +89,30 @@
       <option name="project" value="LOCAL" />
       <updated>1756796564835</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="V2.1, Adding Branding">
+      <option name="closed" value="true" />
+      <created>1756796643741</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1756796643741</updated>
+    </task>
+    <task id="LOCAL-00004" summary="V2.1, Adding requirements.txt">
+      <option name="closed" value="true" />
+      <created>1756796883329</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1756796883329</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="V1.0, initial commit" />
     <MESSAGE value="V2.0, Adding Branding" />
-    <option name="LAST_COMMIT_MESSAGE" value="V2.0, Adding Branding" />
+    <MESSAGE value="V2.1, Adding Branding" />
+    <MESSAGE value="V2.1, Adding requirements.txt" />
+    <option name="LAST_COMMIT_MESSAGE" value="V2.1, Adding requirements.txt" />
   </component>
 </project>

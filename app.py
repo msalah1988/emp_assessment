@@ -169,7 +169,7 @@ st.markdown(
 
 st.sidebar.header("Employee Details")
 if os.path.exists(LOGO_PATH):
-    st.sidebar.image(LOGO_PATH, use_column_width=True)
+    st.sidebar.image(LOGO_PATH)
 
 emp_name = st.sidebar.text_input("Your Full Name")
 emp_manager = st.sidebar.text_input("Your Direct Manager's Name")
