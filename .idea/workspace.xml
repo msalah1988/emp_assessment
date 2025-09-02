@@ -4,14 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="686d6505-db92-436b-a44d-31e03a5be9f8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/Emp_Assessment.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MC4 Logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+    <list default="true" id="686d6505-db92-436b-a44d-31e03a5be9f8" name="Changes" comment="V2.0, Adding Branding">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,6 +32,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
@@ -46,6 +41,11 @@
     "last_opened_file_path": "C:/Users/msalah/PycharmProjects/Emp_Assessment"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\msalah\PycharmProjects\Emp_Assessment" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -61,6 +61,28 @@
       <option name="presentableId" value="Default" />
       <updated>1756793716973</updated>
     </task>
+    <task id="LOCAL-00001" summary="V1.0, initial commit">
+      <option name="closed" value="true" />
+      <created>1756796350530</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1756796350530</updated>
+    </task>
+    <task id="LOCAL-00002" summary="V2.0, Adding Branding">
+      <option name="closed" value="true" />
+      <created>1756796564835</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1756796564835</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="V1.0, initial commit" />
+    <MESSAGE value="V2.0, Adding Branding" />
+    <option name="LAST_COMMIT_MESSAGE" value="V2.0, Adding Branding" />
   </component>
 </project>
