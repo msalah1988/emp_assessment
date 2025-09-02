@@ -2,19 +2,38 @@ import streamlit as st
 from fpdf import FPDF
 import base64
 import datetime
+import os
+
+# --- Branding & Configuration ---
+LOGO_PATH = "MC4 Logo.png"
+# Colors from the provided palette
+COLORS = {
+    "primary_orange": "#F29F05",
+    "secondary_peach": "#F2B66D",
+    "accent_tan": "#BF9056",
+    "dark_brown_text": "#591D07",
+    "light_bg": "#F2E2F2"
+}
 
 
 # --- PDF Generation Function ---
 # This function creates the PDF report using the FPDF library
 def create_pdf(employee_data, results, overall_score):
-    """Generates a professional PDF report from assessment data."""
+    """Generates a professional PDF report from assessment data with branding."""
     pdf = FPDF()
     pdf.add_page()
-    pdf.set_font("Arial", 'B', 16)
 
-    # --- Header ---
+    # --- Header with Logo ---
+    if os.path.exists(LOGO_PATH):
+        # Position logo on the top left
+        pdf.image(LOGO_PATH, x=10, y=8, w=33)
+
+    pdf.set_font("Arial", 'B', 18)
+    # Set text color to dark brown
+    pdf.set_text_color(89, 29, 7)  # Corresponds to #591D07
     pdf.cell(0, 10, "Employee Self-Assessment Report", 0, 1, 'C')
-    pdf.ln(10)
+    pdf.set_text_color(0, 0, 0)  # Reset to black
+    pdf.ln(15)
 
     # --- Employee Information Table ---
     pdf.set_font("Arial", 'B', 11)
@@ -37,11 +56,12 @@ def create_pdf(employee_data, results, overall_score):
     pdf.set_font("Arial", '', 11)
     pdf.cell(0, 8, datetime.date.today().strftime("%B %d, %Y"), 0, 1)
 
-    # --- NEW: Overall Score ---
+    # --- Overall Score ---
     pdf.set_font("Arial", 'B', 12)
     pdf.cell(50, 10, "Overall Score:", 0, 0)
     pdf.set_font("Arial", 'B', 12)
-    pdf.set_text_color(10, 10, 10)  # Dark grey color for the score
+    # Use dark brown for the score text
+    pdf.set_text_color(89, 29, 7)
     pdf.cell(0, 10, f"{overall_score:.1f}%", 0, 1)
     pdf.set_text_color(0, 0, 0)  # Reset to black
     pdf.ln(10)
@@ -50,25 +70,26 @@ def create_pdf(employee_data, results, overall_score):
     pdf.set_font("Arial", 'B', 14)
     pdf.cell(0, 10, "Assessment Results", 0, 1, 'L')
 
-    # Set table header
+    # Set table header with brand colors
     pdf.set_font("Arial", 'B', 10)
-    pdf.set_fill_color(240, 240, 240)
+    pdf.set_fill_color(191, 144, 86)  # Corresponds to #BF9056
+    pdf.set_text_color(255, 255, 255)  # White text for contrast
     pdf.cell(90, 8, "Individual KPI", 1, 0, 'C', 1)
     pdf.cell(60, 8, "Employee Input Figures", 1, 0, 'C', 1)
     pdf.cell(40, 8, "Result / Score", 1, 1, 'C', 1)
+    pdf.set_text_color(0, 0, 0)  # Reset text color
 
     # Table rows
     pdf.set_font("Arial", '', 10)
 
     for category, kpis in results.items():
-        if not kpis:  # Skip empty categories
+        if not kpis:
             continue
         pdf.set_font("Arial", 'B', 11)
-        pdf.set_fill_color(220, 220, 220)
+        pdf.set_fill_color(242, 182, 109)  # Corresponds to #F2B66D
         pdf.cell(190, 10, category, 1, 1, 'L', 1)
         pdf.set_font("Arial", '', 10)
         for kpi, data in kpis.items():
-            # Using multi_cell for better text wrapping
             y_before = pdf.get_y()
             pdf.multi_cell(90, 8, kpi, 1, 'L')
             y_after_kpi = pdf.get_y()
@@ -83,7 +104,6 @@ def create_pdf(employee_data, results, overall_score):
             pdf.multi_cell(40, 8, data['result'], 1, 'C')
             y_after_result = pdf.get_y()
 
-            # Set Y to the max height of the cells in the row
             pdf.set_y(max(y_after_kpi, y_after_inputs, y_after_result))
 
     # --- Signature Section ---
@@ -94,38 +114,75 @@ def create_pdf(employee_data, results, overall_score):
     pdf.cell(95, 6, "Employee Signature", 0, 0, 'L')
     pdf.cell(95, 6, "Direct Manager Signature", 0, 1, 'L')
 
-    # CORRECTED LINE: Removed the unnecessary .encode('latin1')
     return pdf.output(dest='S')
+
+
+# --- Inject Custom CSS for Streamlit Branding ---
+def local_css():
+    css = f"""
+    <style>
+        /* Main background color */
+        .stApp {{
+            background-color: {COLORS['light_bg']};
+        }}
+        /* Main text color */
+        body, .stTextInput, .stNumberInput, .stMarkdown {{
+            color: {COLORS['dark_brown_text']};
+        }}
+        /* Title color */
+        h1, h2, h3 {{
+            color: {COLORS['dark_brown_text']};
+        }}
+        /* Sidebar branding */
+        .st-emotion-cache-16txtl3 {{
+            background-color: #FFFFFF;
+        }}
+        /* Generate button styling */
+        .stButton>button {{
+            background-color: {COLORS['primary_orange']};
+            color: white;
+            border-radius: 5px;
+            border: none;
+            padding: 10px 20px;
+        }}
+        .stButton>button:hover {{
+            background-color: {COLORS['accent_tan']};
+            color: white;
+        }}
+        /* Expander headers */
+        .st-emotion-cache-134p1ja {{
+            background-color: {COLORS['secondary_peach']};
+            border-radius: 5px;
+        }}
+    </style>
+    """
+    st.markdown(css, unsafe_allow_html=True)
 
 
 # --- Streamlit App UI ---
 st.set_page_config(layout="wide", page_title="Self-Assessment PDF Generator")
+local_css()
 
 st.title("Self-Assessment PDF Generator")
 st.markdown(
     "Fill in the details below to generate your performance assessment report. Once generated, you can print the PDF to discuss with your manager.")
 
 st.sidebar.header("Employee Details")
+if os.path.exists(LOGO_PATH):
+    st.sidebar.image(LOGO_PATH, use_column_width=True)
+
 emp_name = st.sidebar.text_input("Your Full Name")
 emp_manager = st.sidebar.text_input("Your Direct Manager's Name")
 emp_period = st.sidebar.text_input("Assessment Period (e.g., Q3 2025)")
 
-# This dictionary will hold all the calculated results
-results = {
-    "Financial": {},
-    "Processes": {},
-    "Customers": {},
-    "Teams": {}
-}
+results = {"Financial": {}, "Processes": {}, "Customers": {}, "Teams": {}}
 
 st.header("KPI Assessment")
 st.markdown("---")
 
-# Using columns for a cleaner layout
 col1, col2 = st.columns(2)
 
 with col1:
-    # --- Processes Category ---
     with st.expander("Category: Processes", expanded=True):
         st.subheader("Task Completion")
         tasks_completed = st.number_input("How many tasks were completed?", min_value=0, step=1, key="p1_comp")
@@ -141,10 +198,7 @@ with col1:
                                                key="p3_root")
         total_incidents_occurred = st.number_input("How many incidents occurred?", min_value=0, step=1, key="p3_total")
 
-        # ... Add other 'Processes' KPIs here if any ...
-
 with col2:
-    # --- Customers Category ---
     with st.expander("Category: Customers", expanded=True):
         st.subheader("Customer Satisfaction")
         positive_responses = st.number_input("What was the total number of satisfied (positive ratings)?", min_value=0,
@@ -163,7 +217,6 @@ with col2:
         total_tickets_handled = st.number_input("How many tickets were handled in total?", min_value=0, step=1,
                                                 key="c3_total")
 
-# --- Teams Category (Full Width) ---
 with st.expander("Category: Teams", expanded=True):
     t_col1, t_col2 = st.columns(2)
     with t_col1:
@@ -191,14 +244,10 @@ with st.expander("Category: Teams", expanded=True):
 
 st.markdown("---")
 
-# --- Generate Button ---
 if st.button("Generate Assessment PDF"):
-    # Basic validation
     if not emp_name or not emp_manager or not emp_period:
         st.warning("Please fill in all Employee Details in the sidebar first.")
     else:
-        # --- REVISED CALCULATION LOGIC ---
-        # Lists to hold percentage scores for each category
         processes_scores = []
         customers_scores = []
         teams_scores = []
@@ -258,15 +307,11 @@ if st.button("Generate Assessment PDF"):
         results["Teams"]["Project Success Rate"] = {"inputs": f"{projects_successful} / {projects_total}",
                                                     "result": f"{proj_success_ratio:.1f}%"}
 
-        # --- Calculate Category and Overall Scores ---
         processes_avg = sum(processes_scores) / len(processes_scores) if processes_scores else 0
         customers_avg = sum(customers_scores) / len(customers_scores) if customers_scores else 0
         teams_avg = sum(teams_scores) / len(teams_scores) if teams_scores else 0
 
-        # Weights from the provided image
         weights = {'processes': 0.30, 'customers': 0.30, 'teams': 0.20}
-
-        # Calculate weighted average
         total_weight = sum(weights.values())
 
         overall_score = 0
@@ -274,14 +319,11 @@ if st.button("Generate Assessment PDF"):
             weighted_sum = (processes_avg * weights['processes']) + \
                            (customers_avg * weights['customers']) + \
                            (teams_avg * weights['teams'])
-            # Normalize the score to be out of 100, as current weights sum to 0.8
             overall_score = weighted_sum / total_weight
 
-        # --- Call PDF generation and create download link ---
         employee_details = {"name": emp_name, "manager": emp_manager, "period": emp_period}
         pdf_bytes = create_pdf(employee_details, results, overall_score)
 
-        # Base64 encoding for the download link
         b64 = base64.b64encode(pdf_bytes).decode()
         href = f'<a href="data:application/octet-stream;base64,{b64}" download="Self_Assessment_{emp_name.replace(" ", "_")}.pdf">Download Your PDF Report</a>'
         st.success("Your PDF report has been generated!")
