@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="686d6505-db92-436b-a44d-31e03a5be9f8" name="Changes" comment="V2.1, Adding requirements.txt">
+    <list default="true" id="686d6505-db92-436b-a44d-31e03a5be9f8" name="Changes" comment="V2.2, remove column width">
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -105,7 +105,15 @@
       <option name="project" value="LOCAL" />
       <updated>1756796883329</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="V2.2, remove column width">
+      <option name="closed" value="true" />
+      <created>1756797307394</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1756797307394</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -113,6 +121,7 @@
     <MESSAGE value="V2.0, Adding Branding" />
     <MESSAGE value="V2.1, Adding Branding" />
     <MESSAGE value="V2.1, Adding requirements.txt" />
-    <option name="LAST_COMMIT_MESSAGE" value="V2.1, Adding requirements.txt" />
+    <MESSAGE value="V2.2, remove column width" />
+    <option name="LAST_COMMIT_MESSAGE" value="V2.2, remove column width" />
   </component>
 </project>
